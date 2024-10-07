@@ -15,14 +15,12 @@ public class JankenController {
     return "janken.html";
   }
 
-  @GetMapping("/Janken/{param1}")
-  public String janken2(@PathVariable String param1, ModelMap model) {
+  @PostMapping("/janken")
+  public String janken(@RequestParam String janken, ModelMap model) {
+    String name = janken;
 
-    // ModelMap型変数のmodelにtasuResult1という名前の変数で，tasuResultの値を登録する．
-    // ここで値を登録するとthymeleafが受け取り，htmlで処理することができるようになる
-    model.addAttribute("name", param1);
+    model.addAttribute("name", name);
     return "janken.html";
-
   }
 
 }
