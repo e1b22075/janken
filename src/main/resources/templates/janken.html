@@ -6,8 +6,38 @@
 </head>
 
 <body>
+  <script th:inline="javascript" th:if="${score}">
+    window.onload = function () {
+      var score = [[${ score }]];
+      var result_txt = "";
+      if (score == 'Gu') {
+        result_txt = "あなたの手 " + score + "<br>相手の手 Gu" + "<br>結果 あいこ";
+      }
+      else if (score == 'Choki') {
+        result_txt = "あなたの手 " + score + "<br>相手の手 Gu" + "<br>結果 You Win";
+      }
+      else if (score == 'Pa') {
+        result_txt = "あなたの手 " + score + "<br>相手の手 Gu" + "<br>結果 You Lose";
+      }
+
+
+      //DOM操作
+      document.getElementById("result").innerHTML = result_txt;
+      console.log(score);//ログ出力．ブラウザのコンソール画面に表示される
+    }
+  </script>
   <h1>じゃんけんゲーム‼</h1>
   <div th:if="${name}">
     <p>hi [[${name}]]</p>
+  </div>
+  <p>
+    <a href="/janken/Gu">ぐー</a>
+    <a href="/janken/Choki">ちょき</a>
+    <a href="/janken/Pa">ぱー</a>
+  </p>
+  <div th:if="${score}">
+    <span id="result">
+      ほげほげ
+    </span>
   </div>
 </body>

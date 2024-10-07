@@ -23,4 +23,11 @@ public class JankenController {
     return "janken.html";
   }
 
+  @GetMapping("/janken/{you}")
+  public String janken2(@PathVariable String you, ModelMap model) {
+    String score = you;
+    model.addAttribute("score", score);
+    return "janken.html";
+  }
+
 }
