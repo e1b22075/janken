@@ -16,19 +16,14 @@ import oit.is.z2354.kaizi.janken.model.Entry;
 public class JankenController {
 
   @Autowired
-  private Entry entry;
+  private Entry room;
 
   @GetMapping("/janken")
-  public String sample21() {
-    return "janken.html";
-  }
-
-  @PostMapping("/janken")
   public String janken(Principal prin, ModelMap model) {
     String loginUser = prin.getName(); // ログインユーザ情報
     model.addAttribute("login_user", loginUser);
-    this.entry.addUser(loginUser);
-    model.addAttribute("entry", this.entry);
+    this.room.addUser(loginUser);
+    model.addAttribute("room", this.room);
     return "janken.html";
   }
 
