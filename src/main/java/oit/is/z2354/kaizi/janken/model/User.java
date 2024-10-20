@@ -6,16 +6,12 @@ public class User {
 
   // Thymeleafでフィールドを扱うためにはgetter/setterが必ず必要
   // vscodeのソースコード右クリック->ソースアクションでsetter/getterを簡単に追加できる
-  public String getUserName() {
+  public String getName() {
     return name;
   }
 
-  public void setUserName(String userName) {
+  public void setName(String userName) {
     this.name = userName;
-  }
-
-  public String getChamberName() {
-    return name;
   }
 
   public int getId() {

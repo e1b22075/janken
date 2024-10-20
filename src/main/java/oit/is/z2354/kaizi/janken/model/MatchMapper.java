@@ -6,11 +6,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-import oit.is.z2354.kaizi.janken.model.User;
 
 @Mapper
-public interface UserMapper {
-  @Select("SELECT name FROM users")
-  ArrayList<User> selectAllByUserName();
-
+public interface MatchMapper {
+  @Select("SELECT * FROM matches")
+  ArrayList<Match> selectAllByResult();
 }
