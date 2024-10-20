@@ -45,11 +45,27 @@ public class JankenController {
     return "janken.html";
   }
 
-  @GetMapping("/janken/{you}")
-  public String janken2(@PathVariable String you, ModelMap model) {
+  @GetMapping("/fight")
+  public String janken2(@RequestParam Integer id, @RequestParam String you, Principal prin, ModelMap model) {
+    int id1;
+    Match match = new Match();
+    match.setUser1Hand(you);
+    match.setUser2(id);
+    User user = userMapper.selectAll(id);
+    model.addAttribute("user", user);
+
+    String loginUser = prin.getName(); // ログインユーザ情報
+    model.addAttribute("login_user", loginUser);
+
+    id1 = 2;
+
+    match.setUser1(id1);
+    match.setUser2Hand("Gu");
+
+    matchMapper.insertChamber(match);
     String score = you;
     model.addAttribute("score", score);
-    return "janken.html";
+    return "match.html";
   }
 
   @GetMapping("/match")

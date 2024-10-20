@@ -34,10 +34,15 @@
     </p>
   </h2>
   <p>
-    <a href="/janken/Gu">ぐー</a>
-    <a href="/janken/Choki">ちょき</a>
-    <a href="/janken/Pa">ぱー</a>
+    <a th:href="@{/fight(id=${user.id}, you='Gu')}">ぐー</a>
+    <a th:href="@{/fight(id=${user.id}, you='Choki')}">ちょき</a>
+    <a th:href="@{/fight(id=${user.id}, you='Pa')}">ぱー</a>
+
+
+
+
   </p>
+  <a href="/janken">もどる</a>
   <div th:if="${score}">
     <span id="result">
       ほげほげ
