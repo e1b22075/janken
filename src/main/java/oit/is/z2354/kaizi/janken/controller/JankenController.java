@@ -52,4 +52,17 @@ public class JankenController {
     return "janken.html";
   }
 
+  @GetMapping("/match")
+  public String match(@RequestParam Integer id, Principal prin, ModelMap model) {
+
+    User user = userMapper.selectAll(id);
+    model.addAttribute("user", user);
+
+    String loginUser = prin.getName(); // ログインユーザ情報
+    model.addAttribute("login_user", loginUser);
+
+    return "match.html";
+
+  }
+
 }
