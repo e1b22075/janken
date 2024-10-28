@@ -16,6 +16,8 @@ import oit.is.z2354.kaizi.janken.model.User;
 import oit.is.z2354.kaizi.janken.model.UserMapper;
 import oit.is.z2354.kaizi.janken.model.Match;
 import oit.is.z2354.kaizi.janken.model.MatchMapper;
+import oit.is.z2354.kaizi.janken.model.MatchInfoMapper;
+import oit.is.z2354.kaizi.janken.model.MatchInfo;
 
 @Controller
 public class JankenController {
@@ -29,6 +31,9 @@ public class JankenController {
   @Autowired
   private MatchMapper matchMapper;
 
+  @Autowired
+  private MatchInfoMapper matchinfoMapper;
+
   @GetMapping("/janken")
   public String janken(Principal prin, ModelMap model) {
     ArrayList<User> user = userMapper.selectAllByUserName();
@@ -37,23 +42,23 @@ public class JankenController {
     ArrayList<Match> match = matchMapper.selectAllByResult();
     model.addAttribute("match", match);
 
+    ArrayList<MatchInfo> matchinfo = matchinfoMapper.selectAllByActive();
+
     String loginUser = prin.getName(); // ログインユーザ情報
     model.addAttribute("login_user", loginUser);
     this.room.addUser(loginUser);
     model.addAttribute("room", this.room);
-
+    model.addAttribute("matchinfo", matchinfo);
     return "janken.html";
   }
 
   @GetMapping("/fight")
   public String janken2(@RequestParam Integer id, @RequestParam String you, Principal prin, ModelMap model) {
     int id1;
-    Match match = new Match();
+    MatchInfo match = new MatchInfo();
     match.setUser1Hand(you);
     match.setUser2(id);
-    User user = userMapper.selectAll(id);
-    model.addAttribute("user", user);
-
+    match.setIsActive(true);
     String loginUser = prin.getName(); // ログインユーザ情報
     model.addAttribute("login_user", loginUser);
     String user1 = loginUser;
@@ -61,12 +66,11 @@ public class JankenController {
     id1 = userMapper.selectname(user1);
 
     match.setUser1(id1);
-    match.setUser2Hand("Gu");
 
-    matchMapper.insertChamber(match);
+    matchinfoMapper.insertChamber(match);
     String score = you;
     model.addAttribute("score", score);
-    return "match.html";
+    return "wait.html";
   }
 
   @GetMapping("/match")
