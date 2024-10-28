@@ -56,8 +56,9 @@ public class JankenController {
 
     String loginUser = prin.getName(); // ログインユーザ情報
     model.addAttribute("login_user", loginUser);
+    String user1 = loginUser;
 
-    id1 = 2;
+    id1 = userMapper.selectname(user1);
 
     match.setUser1(id1);
     match.setUser2Hand("Gu");
